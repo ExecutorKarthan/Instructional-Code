@@ -1,0 +1,96 @@
+from datetime import datetime
+#Define a function to determine if a number is significant in a value
+def num_sig_figs(num):
+    #Test to ensure all the string characters are not letters. If they are all numbers, calculate
+    error = False
+    for x in num:
+        if x.isnumeric() == False and x != ".":
+            error = True
+    if error == False:
+        sigfig = 0
+        prior_letter = ""
+        follow_letter = ""
+        decimal_count = 0
+        decimal_present = False
+
+        #Create a loop that moves through each number in turn to determine if it is significant
+        for count, letter in enumerate(num):
+            #Creates reference values depending on the value entered
+            if letter == ".":
+                decimal_count = count
+                decimal_present = True
+        
+            #Any number that is not 0 is significant. This if statement updates sigfig values for any non-zero
+            if letter != "0" and letter !=".":
+                sigfig += 1
+        
+            #Creates rules to handle if a 0 is significant or not
+            if letter == "0":
+                prior_sigfig = False
+                follow_sigfig = False
+                #This is one list that is used to identify significant letters before the letter in question
+                prior_sub = num[:count] 
+                #This is one list that is used to identify significant letters after the letter in question
+                follow_sub = num[count:len(num)] 
+                follow_dig_end = 0 
+                
+                #Creates a substring of numbers prior to the current number. 
+                for letter in prior_sub:  
+                    if letter != "0" and letter !=".":
+                        prior_sigfig = True
+                
+                #This is used to tell if a significant number precedes the current number
+                for letter in follow_sub:
+                    if letter != "0" or letter ==".":
+                        follow_sigfig = True
+                        follow_dig_end = count
+
+                #Determines if a 0 between two significant numbers is significant
+                if prior_sigfig == True and follow_sigfig == True:
+                    sigfig += 1
+        
+                #Determines if a 0 in the decimal place that follows a significant figure is significant
+                if prior_sigfig == True and count > decimal_count \
+                    and decimal_present == True \
+                    and count > follow_dig_end:
+                    sigfig +=1
+        return sigfig
+    else:
+        print("I\'m sorry. You have entered an invalid input. Please try again using only digits or digits and a decimal.")
+
+#Create a function to save the values entered and their sig figs as a file.
+def saving_function(value, sigfig):
+    #I imported and modified this code to get a timestamp from a web resource
+    now = datetime.now()
+    current_time = now.strftime("%H-%M-%S")
+    #Original code continues below this line _________________________________
+    file_name = "_Sig_Fig_Log_" + current_time + ".txt"
+    log = open(file_name, 'x')
+    log.write("Value Entered".ljust(25) + "Number of Significant Figures".ljust(75) + "\n")
+    
+    #Combines the values from the user input and the sigfig output into a 
+    # readable format, then saves it as a txt file
+    for value, sigfig in zip(value, sigfig):
+        string_val = value.ljust(40) + str(sigfig).ljust(100) + "\n"
+        log.write(string_val)
+    log.close()
+
+entered_value = []
+sigfig_output = []
+repeat = True
+while repeat == True:
+    #Collects a number from the user to calculate significant figures
+    value = input('Welcome to the signficant figure calculator! Please enter any value you would like analyzed. Please do not include commas, only a decimal. \n ')
+    total_sig_figs = num_sig_figs(value)
+    if total_sig_figs != None:
+        print('The number of significant figures in ' + value + ' would be: ')
+        print(total_sig_figs)
+    entered_value.append(value)
+    sigfig_output.append(total_sig_figs)
+    #Provides the option to exit the program or to run another value
+    con_cal = input('Would you like to input another number? Yes or No ')
+    if con_cal == "y" or con_cal == "Y" or con_cal == "Yes" or con_cal == "yes":
+        repeat = True
+    else:
+        repeat = False
+        saving_function(entered_value, sigfig_output)
