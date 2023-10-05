@@ -1,5 +1,4 @@
 import random
-import io
 
 controlMaps = ["Ilios", "Lijiang", "Oasis", "Nepal", "Antarctic Peninsula"]
 escortMaps = ["Circuit Royal", "Dorado", "Havana", "Route 66", "Watchpoint", "Junkertown", "Shambali Monastery", "Rialto"]
@@ -9,18 +8,19 @@ mapList = [controlMaps, escortMaps, hybridMaps, pushMaps]
 previousValues = {0:False, 1:False, 2:False, 3:False}
 
 roundList = []
-for round in range(0, 8):
+for round in range(0, 9):
     current_round = []
+    previousValues = {0:False, 1:False, 2:False, 3:False}
     round_cont = True
     while(round_cont):
-        for index in range(0, 4):
-            if(previousValues.get(index) == True):
-                round_cont = False
-                break
-            else:
-                round_cont = True
+        if(previousValues.get(0) == True and previousValues.get(1) == True and previousValues.get(2) == True and previousValues.get(3) == True):
+            round_cont = False
+            break
+        else:
+            round_cont = True
         randMapIndex = random.randint(0, 3)
-        while(previousValues.get(randMapIndex)):
+        test = previousValues.get(randMapIndex) == True
+        while(round_cont == True and previousValues.get(randMapIndex) == True):
             randMapIndex = random.randint(0, 3)
         for value in range(0, 10):
             random.shuffle(controlMaps)
@@ -29,5 +29,6 @@ for round in range(0, 8):
             random.shuffle(pushMaps)
         current_round.append(mapList[randMapIndex][0])    
         previousValues.update({randMapIndex: True})
-        
-print("pause")
+    roundList.append(current_round)
+for round in roundList:
+    print(round)        
