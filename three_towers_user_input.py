@@ -1,5 +1,14 @@
 import turtle
 
+def get_height_value():
+    value = input("How many pixels tall do you want your tower? ")  
+    try:
+        max_height = int(value)
+        return max_height
+    except:
+        print("Error! You need to input a numeric integer or float. All other values will not work")
+        get_height_value()
+
 def get_brick_value():
     value = input("How many bricks high do you want your towers? ")  
     try:
@@ -10,7 +19,7 @@ def get_brick_value():
         get_brick_value()
         
 def get_color_list():
-    value = input("What colors do you want the towers to alternate? Seperate your selections with the ',' character. " + "\n") 
+    value = input("What colors do you want the towers to alternate? Seperate your selections with the ' ' character. " + "\n") 
     color_list = value.split()
     reference_color_list = ["yellow", "gold", "orange", "red", "maroon", "violet", "magenta", "purple", "navy", "blue", "skyblue", "cyan", "turquoise", "lightgreen", "green", "darkgreen", "chocolate", "brown", "black", "gray", "white"]
     for color in color_list:
@@ -63,10 +72,8 @@ def make_brick(tower_num, brick, max_height, max_bricks, color_list):
     builder.penup()
     builder.forward(max_height/max_bricks)
     builder.pendown()
-    
-max_height = 800
 
-max_bricks = get_brick_value()
+
 color_list = get_color_list()
 builder = turtle.Turtle()
 builder.speed(0)
@@ -76,18 +83,24 @@ for tower in range (0, 3):
         builder.penup()
         builder.goto(-400, -400)
         builder.pendown()
+        max_height = get_height_value()
+        max_bricks = get_brick_value()
         for brick in range(1, max_bricks+1):
             make_brick(tower, brick, max_height, max_bricks, color_list)
     if (tower == 1):
         builder.penup()
         builder.goto(0, -400)
         builder.pendown()
+        max_height = get_height_value()
+        max_bricks = get_brick_value()
         for brick in range(1, max_bricks+1):
             make_brick(tower, brick, max_height, max_bricks, color_list)
     if (tower == 2):
         builder.penup()
         builder.goto(400, -400)
         builder.pendown()
+        max_height = get_height_value()
+        max_bricks = get_brick_value()
         for brick in range(1, max_bricks+1):
             make_brick(tower, brick, max_height, max_bricks, color_list)
             
