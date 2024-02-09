@@ -1,4 +1,4 @@
-public class Test {
+public class Overflow {
     public static void main(String[] args){
         int count = 0;
         int value = 2147483643;
