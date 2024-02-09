@@ -21,4 +21,3 @@ while(index < max_length):
 
 result = num_remain + count
 print(result)
-    
