@@ -1,4 +1,4 @@
-raw_input = input("Enter a 9 numbers no smaller than 1 and no greater than 10. There can be no repeates and must be seperated by spaces.")
+raw_input = input("Enter 9 numbers no smaller than 1 and no greater than 10. There can be no repeats and must be seperated by spaces.")
 processed_input = raw_input.split(" ")
 
 num_list = []
