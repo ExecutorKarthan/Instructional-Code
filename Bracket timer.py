@@ -91,7 +91,9 @@ games_played = games_played + winners_results
     
 losers_results = bracket(losers_bracket)
   
-games_played = games_played + losers_results
+# games_played = games_played + losers_results
+
+games_played = games_played
 
 final_results = bracket(winners_bracket)
 
