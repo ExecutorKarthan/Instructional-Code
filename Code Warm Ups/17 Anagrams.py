@@ -1,5 +1,5 @@
-word_1 = "Horsasde"
-word_2 = "erssesoh"
+word_1 = "racecar"
+word_2 = "carrace"
 
 stack = [*word_1.lower()]
 
@@ -14,7 +14,7 @@ print(stack)
 print(reference)
 
 for letter in reference:
-    if letter not in reference:
+    if letter not in stack:
         break
     else:
         if(letter == stack[len(stack)-1]):

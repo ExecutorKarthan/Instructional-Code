@@ -48,7 +48,11 @@ class MultiFactorAuth(tk.Tk):
     self.ent_password = tk.Entry(self.frame_login, show="*", bd=3)
     self.ent_password.pack(pady=5)
 
-    self.btn_login = tk.Button(self.frame_login, text="LOG IN", command=self.authorize)
+      # Add this code before the code that creates your "Login" button
+    self.bt_image = tk.PhotoImage(file="button.gif")
+    self.bt_image = self.bt_image.subsample(10,10)  
+
+    self.btn_login = tk.Button(self.frame_login, command=self.authorize, image=self.bt_image)
     self.btn_login.pack(padx=175, pady=20)
     
     # show this authorization frame
