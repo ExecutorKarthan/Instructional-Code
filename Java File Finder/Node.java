@@ -26,9 +26,25 @@ public class Node {
             if(uniqueChild){
                 this.childNodes.add(child);
             }
+        }
+        else{
+            this.childNodes.add(child);
         }   
         if(child.parentNode == null){
             child.addParent(this);
+        }
+    }
+
+    public ArrayList<Node> getChildNodes(){
+        return this.childNodes;
+    }
+
+    public Node getParentNode(){
+        if(parentNode != null){
+            return this.parentNode;
+        }
+        else{
+            return null;
         }
     }
 
@@ -36,15 +52,15 @@ public class Node {
         this.parentNode = parent;
     }
 
-    public void getChildren(){
+    public void printChildren(){
         String response = this.fileName + " has the following children: " + "\n";
         for(Node child: this.childNodes){
             response += child.getName() + ", ";
         }
-        System.out.println(response);
+        System.out.println(response.substring(0, response.length()-2));
     }
 
-    public void getParent(){
+    public void printParent(){
         if(this.parentNode != null){
             System.out.println(this.fileName + " has the following parent: " + this.parentNode.getName() + "\n");
         }
@@ -52,7 +68,7 @@ public class Node {
 
     public void printObject(){
         System.out.println(this.fileName);
-        this.getChildren();
-        this.getParent();
+        this.printChildren();
+        this.printParent();
     }
 }
