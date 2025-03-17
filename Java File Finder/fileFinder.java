@@ -1,27 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 class fileFinder{
     public static String path_creator(String path, String targetFileName, String currentFileName, Map <String, Node> nameToObj) {
+        // Complete this code for the recusive function
         String result = "";
-        if (currentFileName.equals(targetFileName)) {
-            return path + currentFileName;
-        }
-        else{
-            ArrayList<Node> currentChildren = nameToObj.get(currentFileName).getChildNodes();
-            for(Node childNode: currentChildren){
-                String newPath = path + currentFileName + "/";
-                result = path_creator(newPath, targetFileName, childNode.getName(), nameToObj); 
-                if(result != null && result.substring(result.lastIndexOf("/")+1).equals(targetFileName)){
-                    return result;
-                }
-            }
-            return null;
-        }
+        return result;
     }
     public static void main(String Args []){
         Map <String, Node> nameToObj = new HashMap<>();
@@ -54,5 +41,6 @@ class fileFinder{
             System.out.println("An error occurred.");
             e.printStackTrace();
         } 
+        // Add your code to search the file system here
     }
 }
