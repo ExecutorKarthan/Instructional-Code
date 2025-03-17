@@ -1,18 +1,21 @@
-list_to_sort = [1, 5, 2, 9, 11, 20, 4, 7]
-total_length = len(list_to_sort)
-current_value_index = 0
-temp_holder = 0
+import random
 
-while current_value_index+1 < total_length:
-    current_val = list_to_sort[current_value_index]
-    next_val = list_to_sort[current_value_index+1]
-    if (list_to_sort[current_value_index] < list_to_sort[current_value_index+1]):
-        current_value_index = current_value_index + 1
-    else:
-        temp_holder = list_to_sort[current_value_index+1]
-        list_to_sort[current_value_index+1] = list_to_sort [current_value_index]
-        list_to_sort [current_value_index] = temp_holder
-        current_value_index = 0
+def make_list():
+    list = []
+    while len(list) < 10:
+        rand_val = random.randint(-200, 200)
+        list.append(rand_val)
+    return list
 
-print(list_to_sort)
-        
+def bubble_sort(list):
+    for first_index in range(len(list)-1, len(list)):
+        for second_index in range(len(list)):
+            if(list[first_index] < list[second_index]):
+                temp = list[first_index]
+                list[first_index] = list[second_index]
+                list[second_index] = temp
+    return list               
+    
+random_list = make_list()
+print(random_list)
+print(bubble_sort(random_list))
