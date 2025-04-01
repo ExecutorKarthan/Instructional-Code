@@ -15,6 +15,6 @@ public class leastCommonMultiple {
         return num1 * num2;
     }
     public static void main (String [] Args){
-        System.out.println(leastCommonMultiple.lcm(20,8, 1));
+        System.out.println(leastCommonMultiple.lcm(15,20, 1));
     }
 }

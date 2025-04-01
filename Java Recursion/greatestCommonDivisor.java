@@ -23,6 +23,6 @@ public class greatestCommonDivisor {
         return 1;
     }
     public static void main (String [] Args){
-        System.out.println(greatestCommonDivisor.gcd(80,56));
+        System.out.println(greatestCommonDivisor.gcd(15,20));
     }
 }
